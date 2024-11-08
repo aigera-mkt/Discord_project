@@ -36,7 +36,9 @@ jobs:
 
       - name: Run tests with pytest and generate Allure results
         env:
-          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          DISCORD_API_KEY: ${{ secrets.DISCORD_API_KEY }}
+          EMAIL: ${{secrets.EMAIL}}
+          PASSWORD: ${{secrets.PASSWORD}}
         run: |
           pytest backend.py login_action.py frontend.py --alluredir=allure-results
         continue-on-error: true
