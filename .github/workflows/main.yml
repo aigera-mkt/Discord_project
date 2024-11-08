@@ -39,10 +39,6 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
-      env:
-        DISCORD_API_KEY: ${{ secrets.DISCORD_API_KEY }}
-        EMAIL: ${{secrets.EMAIL}}
-        PASSWORD: ${{secrets.PASSWORD}}
       run: |
         pytest tests_all.py --alluredir=allure-results
       continue-on-error: true
@@ -67,6 +63,8 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       if: always()
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        DISCORD_API_KEY: ${{secrets.DISCORD_API_KEY }}
+        EMAIL: ${{secrets.EMAIL}}
+        PASSWORD: ${{secrets.PASSWORD}}
         publish_branch: gh-pages
         publish_dir: allure-history
